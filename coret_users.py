@@ -17,17 +17,21 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 import sys
-from coret_fake import FAKE_USERS_FILE
+import errno
+from coret_fake import FAKE_USERS_FILES
 
 def add_users(passwdDB):
-    file = open(FAKE_USERS_FILE, "r")
 
-    i = 0
-    for line in file:
-        i += 1
-        data = line.split(' ')
-        try:
-            passwdDB.addUser(data[0], data[1].rstrip())
-        except:
-            print "Error in fake users file at line " + str(i)
-            print sys.exc_info()[1]
+    for path in FAKE_USERS_FILES:
+	try:
+            with open(path,"r") as file:
+                for i,line in enumerate(file):
+                    data = line.split(' ')
+                    try:
+                        passwdDB.addUser(data[0], data[1].rstrip())
+                    except:
+                        print "Error in fake users file at line " + str(i)
+                        print sys.exc_info()[1]
+        except IOError as e: 
+            if e.errno != errno.ENOENT:
+                raise e

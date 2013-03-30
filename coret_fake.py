@@ -43,7 +43,7 @@ FAKE_LS = ("drwxr-xr-x    2 root root   4096 2005-06-06 07:00 bin",
 )
 FAKE_WGET = "--00:32:24--  http://../","           => `index.html'", "Resolviendo ..... fallo: No se ha encontrado el anfitrion."
 FAKE_FTP = "ftp: ..: No address associated with name", "ftp> "
-FAKE_USERS_FILE = "/etc/kojoney/fake_users"
+FAKE_USERS_FILES = [ "./fake_users", "/etc/kojoney/fake_users"]
 FAKE_RM = "rm: Permission denied"
 FAKE_TOUCH = "touch: Permission denied"
 FAKE_DENIED = "Permission denied"
