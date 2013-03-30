@@ -77,7 +77,7 @@ class CoretProtocol(protocol.Protocol):
 
     def connectionMade(self):
         print self.transport
-        self.transport.write('Wellcome to ' + str(FAKE_OS) + '!\r\n\r\n' +str(FAKE_PROMPT))
+        self.transport.write('Welcome to ' + str(FAKE_OS) + '!\r\n\r\n' +str(FAKE_PROMPT))
 
     def dataReceived(self, data):
         global FAKE_PROMPT
@@ -103,8 +103,8 @@ class CoretProtocol(protocol.Protocol):
 
         self.transport.write(data)
 
-publicKey = 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAGEArzJx8OYOnJmzf4tfBEvLi8DVPrJ3/c9k2I/Az64fxjHf9imyRJbixtQhlH9lfNjUIx+4LmrJH5QNRsFporcHDKOTwTTYLh5KmRpslkYHRivcJSkbh/C+BR3utDS555mV'
 
+publicKey = 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAGEArzJx8OYOnJmzf4tfBEvLi8DVPrJ3/c9k2I/Az64fxjHf9imyRJbixtQhlH9lfNjUIx+4LmrJH5QNRsFporcHDKOTwTTYLh5KmRpslkYHRivcJSkbh/C+BR3utDS555mV'
 privateKey = """-----BEGIN RSA PRIVATE KEY-----
 MIIByAIBAAJhAK8ycfDmDpyZs3+LXwRLy4vA1T6yd/3PZNiPwM+uH8Yx3/YpskSW
 4sbUIZR/ZXzY1CMfuC5qyR+UDUbBaaK3Bwyjk8E02C4eSpkabJZGB0Yr3CUpG4fw
@@ -117,6 +117,14 @@ DZttmYJeEfiFBBavVYIF1dOlZT0G8jMCMBc7sOSZodFnAiryP+Qg9otSBjJ3bQML
 pSTqy7c3a2AScC/YyOwkDaICHnnD3XyjMwIxALRzl0tQEKMXs6hH8ToUdlLROCrP
 EhQ0wahUTCk1gKA4uPD6TMTChavbh4K63OvbKg==
 -----END RSA PRIVATE KEY-----"""
+
+if os.path.exists(SERVER_PUBLIC_KEY_FILE) and os.path.exists(SERVER_PRIVATE_KEY_FILE):
+
+        with open(SERVER_PUBLIC_KEY_FILE,'r') as file:
+                publicKey = file.read()
+	with open(SERVER_PRIVATE_KEY_FILE,'r') as file:
+		privateKey = file.read()
+
 
 class InMemoryPublicKeyChecker(SSHPublicKeyDatabase):
 

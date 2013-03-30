@@ -47,3 +47,6 @@ FAKE_USERS_FILES = [ "./fake_users", "/etc/kojoney/fake_users"]
 FAKE_RM = "rm: Permission denied"
 FAKE_TOUCH = "touch: Permission denied"
 FAKE_DENIED = "Permission denied"
+
+SERVER_PUBLIC_KEY_FILE = "./publicKey"
+SERVER_PRIVATE_KEY_FILE = "./privateKey"
