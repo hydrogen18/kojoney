@@ -153,8 +153,8 @@ from twisted.python import components
 components.registerAdapter(CoretSession, CoretAvatar, session.ISession)
 
 class CoretFactory(factory.SSHFactory):
-    publicKeys = {'ssh-rsa': keys.getPublicKeyString(data=publicKey)}
-    privateKeys = {'ssh-rsa': keys.getPrivateKeyObject(data=privateKey)}
+    publicKeys = {'ssh-rsa': keys.Key.fromString(data=publicKey)}
+    privateKeys = {'ssh-rsa': keys.Key.fromString(data=privateKey)}
     services = {'ssh-userauth': userauth.SSHUserAuthServer, 'ssh-connection': connection.SSHConnection}
     
     def buildProtocol(self, addr):
